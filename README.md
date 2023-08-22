@@ -1,20 +1,41 @@
 # Analysis_Zebrafish
+A framework for analyzing the calcium imaging of zebrafish
 
-code running example
+## Getting Started
+```
+git clone https://github.com/Knerlab/neural-activity-analysis.git
+cd neural-activity-analysis
+conda create --name zebrafish --file requirements.txt
+conda activate zebrafish
+```
 
+**Dataset:** we release some of the datasets used in paper [here](). 
 
-directory = ""
+**Zebrafish Brain Atlas:** can be download [here](https://fishatlas.neuro.mpg.de/)
 
-files = listallfiles(directory)
-video = readandconvert(files)
-video = driftcorrect(video)
-video = BackExtract(video)
-video = data.astype("int")
-video_shifted = BackExtract(video)
-video_straight = np.array([video_shifted[i,:,:].reshape((video_shifted.shape[1]*video_shifted.shape[1],)) for i in range(video_shifted.shape[0])]).T
-video_smooth = np.array(pool.map(knnsmooth,video_straight))
-video = svddnoise(video,num_eiganvalue=20) need to be adjust accordingly
-video_normed = np.array(pool.map(normalization,video_smooth))
+## Demo Example
+```
+python demo.py
+```
 
+## Data Preprocessing
+```
+python preprocess.py
+```
+Including the correction of motion artifacts, environmental lights artifacts, and signal normalizing
 
-if want to check can use makestack save as image stack
+## ROI segmentation and signal extraction
+```
+python ROIExtraction.py
+```
+need to set the path of the atlas
+
+## Dynamic Functional Connectivity Analysis
+```
+python meta_analysis_FC.py
+```
+
+## Spectra Analysis
+```
+python meta_analysis_fre_ROI.py
+```
